@@ -11,6 +11,8 @@ const __dirname = dirname(__filename)
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import LanguageModel from './models/LanguageModel.js'
+import cors from 'cors'
+
 
 dotenv.config()
 mongoose.connect(process.env.MONGOURI)
@@ -18,6 +20,7 @@ mongoose.connect(process.env.MONGOURI)
 import express from 'express'
 const app = express();
 
+app.use(cors())
 app.use(express.static('dist'))
 app.get('/', async (req, res) => {
     res.sendFile(__dirname + '/dist/index.html')
